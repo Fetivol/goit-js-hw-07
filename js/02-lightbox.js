@@ -26,3 +26,10 @@ let gallery = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   navText: ['<', '>'],
 });
+gallery.on('show.simplelightbox', () => {
+  console.log(
+    gallery,
+    gallery.options.captionsData,
+    gallery.options.captionDelay
+  );
+});
