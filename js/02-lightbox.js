@@ -26,18 +26,3 @@ let gallery = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   navText: ['<', '>'],
 });
-
-container.addEventListener('click', evt => {
-  evt.preventDefault();
-  if (!evt.target.classList.contains('gallery__image')) {
-    return;
-  }
-
-  gallery.on('show.simplelightbox', () => {
-    console.log(
-      gallery,
-      gallery.options.captionsData,
-      gallery.options.captionDelay
-    );
-  });
-});

@@ -7,17 +7,16 @@ const liElements = galleryItems
     ({ preview, original, description }) =>
       `
     <li class="gallery__item">
-  <a class="gallery__link" href="${original}"
-  >
-    <img
-      class="gallery__image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}"
-    />
-  </a>
-</li>
-`
+      <a class="gallery__link" href="${original}">
+        <img
+          class="gallery__image"
+          src="${preview}"
+          data-source="${original}"
+          alt="${description}"
+        />
+      </a>
+    </li>
+  `
   )
   .join('');
 container.insertAdjacentHTML('beforeend', liElements);
@@ -32,27 +31,20 @@ container.addEventListener('click', evt => {
     <img src="${evt.target.dataset.source}" width="800" height="600">
     `,
     {
-      onShow: document.addEventListener('keydown', evt => {
-        if (evt.key === 'Escape') {
-          instance.close();
-        }
-      }),
-      onClose: document.removeEventListener('keydown', evt => {
-        if (evt.key === 'Escape') {
-          instance.close();
-        }
-      }),
+      onShow: () => {
+        window.addEventListener('keydown', handlerModalClose);
+      },
+      onClose: () => {
+        window.removeEventListener('keydown', handlerModalClose);
+      },
     }
   );
   instance.show();
 
-  //   closingModal(instance);
+  function handlerModalClose(evt) {
+    console.log(evt.key);
+    if (evt.key === 'Escape') {
+      instance.close();
+    }
+  }
 });
-
-// function closingModal(modal) {
-//     document.addEventListener('keydown', evt => {
-//         if (evt.key === 'Escape' && modal.visible()) {
-//             modal.close();
-//         }
-//     });
-// }
